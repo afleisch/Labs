@@ -20,24 +20,26 @@ attr_accessor :stomach, :allergy
 
 
 	def eat(food) #a method to pass the food arrays to the objects
-		@stomach = [] #the stomach starts empty because we haven't given it any food yet
-		@stomach.each {|x| @stomach << food} #for each item in the food array, put
-		#it in the @stomach array
-		if food.include?(@allergy) #if the food array includes the @allergy that you
+		new_stomach = [] #the stomach starts empty because we haven't given it any food yet
+		new_stomach = food.each {|x| new_stomach << food} #for each item in the food array, put
+		#it in the new_stomach array
+		unless food.include?(@allergy)#unless the food array includes the @allergy that you
 			#pass in when you call .new
+			p new_stomach  #print the new stomach to the screen.
+			puts "that hit the spot!"
+		 #otherwise 
 		  begin #raise an error because they are allergic and they should stop eating
 		  	#i.e. stop adding things to the @stomach array
 		   raise AllergyError.new("this person is allergic to #{@allergy}") #new instance of
 		   	#AllergyError
 		  rescue #instead of breaking in the program, instead, clear the @stomach array
 		  	#and print the empty array to the screen
-			 	@stomach.clear
-			 	p @stomach
+			 	new_stomach.clear
+			 	p new_stomach
 			 	puts "you just ate something you are allergic to and threw up everywhere."
 		  end			
-		else #otherwise print the full @stomach array to the screen
-			p @stomach
-			puts "That was delicious!"
+	
+			
 		end
 		
 	end
@@ -52,9 +54,9 @@ beth = Person.new("scallops") #new Person object with variable beth which will h
 
 
 chris.eat(pizza)
-chris.eat(pan_seared_scallops)
-chris.eat(water)
+# chris.eat(pan_seared_scallops)
+# chris.eat(water)
 
 beth.eat(pizza)
-beth.eat(pan_seared_scallops)
-beth.eat(water)
+# beth.eat(pan_seared_scallops)
+# beth.eat(water)
